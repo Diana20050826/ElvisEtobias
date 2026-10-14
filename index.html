@@ -295,11 +295,442 @@
             .caixa-quiz {
                 padding: 16px;
             }
-        }
+        } 
+/* ================================
+   🐾 ANIMAÇÕES ELVIS & TOBIAS
+================================ */
+
+/* Deslizar suavemente pela página */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Transições suaves */
+a,
+button,
+img {
+    transition: all 0.3s ease;
+}
+
+/* Cartões dos gatos */
+.cartao-gato:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(80, 50, 30, 0.18);
+}
+
+/* Fotografias da galeria */
+img {
+    transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+img:hover {
+    filter: brightness(1.04);
+}
+
+/* Botões interativos */
+button:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.06);
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+/* Animação de entrada */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Títulos e secções */
+h1 {
+    animation: aparecer 1s ease both;
+}
+
+section {
+    animation: aparecer 0.8s ease both;
+}
+
+/* Movimento suave dos emojis */
+@keyframes saltitar {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+/* Animação opcional para elementos decorativos */
+.emoji-animado {
+    display: inline-block;
+    animation: saltitar 1.8s ease-in-out infinite;
+}
+
+/* Respeitar quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* 📸 GALERIA EM TAMANHO GRANDE */
+
+.visualizador-foto {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    background: rgba(20, 17, 15, 0.94);
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 60px 15px 75px;
+}
+
+.visualizador-foto.aberto {
+    display: flex;
+    animation: aparecerFestinha 0.25s ease;
+}
+
+#foto-grande {
+    display: block;
+    max-width: min(75vw, 850px);
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 15px;
+    box-shadow: 0 8px 35px #00000060;
+}
+
+#legenda-foto {
+    position: absolute;
+    bottom: 15px;
+    left: 10px;
+    right: 10px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.fechar-foto {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    background: var(--laranja);
+    color: var(--preto);
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.seta-foto {
+    border: none;
+    border-radius: 50%;
+    padding: 12px;
+    background: var(--laranja);
+    color: var(--preto);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .visualizador-foto {
+        gap: 8px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    #foto-grande {
+        max-width: 68vw;
+        max-height: 65vh;
+    }
+
+    .seta-foto {
+        padding: 9px;
+        font-size: 15px;
+    }
+}
+/* ✨ ENTRADA SUAVE DOS CARTÕES */
+
+.animar-entrada {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.animar-entrada.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animar-entrada,
+    .animar-entrada.visivel {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+/* 🌙 BOTÃO PARA MUDAR O TEMA */
+
+#botao-tema {
+    position: fixed;
+    top: 90px;
+    right: 18px;
+    z-index: 1000;
+    padding: 11px 16px;
+    border: 2px solid var(--laranja);
+    border-radius: 25px;
+    background: var(--creme);
+    color: var(--preto);
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px #00000020;
+    transition: transform 0.25s ease;
+}
+
+#botao-tema:hover {
+    transform: scale(1.06);
+}
+
+body.tema-noturno {
+    --preto: #fff4e5;
+    --bege: #3b3029;
+    --creme: #211c19;
+    --castanho: #f0bd86;
+}
+
+body.tema-noturno header,
+body.tema-noturno footer {
+    background: #171310;
+    color: #fff4e5;
+}
+
+@media (max-width: 600px) {
+    #botao-tema {
+        top: 75px;
+        right: 10px;
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+}
+/* 🐾 CONTADORES DE FESTINHAS */
+
+.contador-festinhas {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: var(--bege);
+    color: var(--preto);
+    font-weight: bold;
+    border: 1px solid var(--laranja);
+}
+
+.contador-festinhas span {
+    color: var(--castanho);
+    font-size: 1.15em;
+}
+/* 💌 MENSAGENS SURPRESA */
+
+.texto-surpresa {
+    max-width: 650px;
+    margin: 25px auto 0;
+    padding: 25px;
+    background: var(--bege);
+    color: var(--preto);
+    border: 2px dashed var(--laranja);
+    border-radius: 22px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.8;
+    transition: transform 0.25s ease;
+}
+
+.texto-surpresa.mensagem-nova {
+    transform: scale(1.03);
+}
+/* 📔 DIÁRIO DOS PATUDOS */
+
+.caixa-diario {
+    max-width: 650px;
+    margin: 25px auto;
+    padding: 25px;
+    background: var(--bege);
+    border: 2px solid var(--laranja);
+    border-radius: 22px;
+    text-align: left;
+}
+
+.caixa-diario label {
+    display: block;
+    margin: 15px 0 6px;
+    font-weight: bold;
+}
+
+.caixa-diario input,
+.caixa-diario select,
+.caixa-diario textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid var(--castanho);
+    border-radius: 10px;
+    background: var(--creme);
+    color: var(--preto);
+    font: inherit;
+}
+
+.caixa-diario textarea {
+    resize: vertical;
+}
+
+#guardar-aventura {
+    margin-top: 18px;
+}
+
+.aventura-guardada {
+    margin: 15px auto;
+    padding: 20px;
+    max-width: 650px;
+    background: var(--creme);
+    border-left: 5px solid var(--laranja);
+    border-radius: 12px;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+.aventura-guardada h4 {
+    margin-top: 0;
+    color: var(--castanho);
+}
+
+.apagar-aventura {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 10px;
+    background: var(--laranja);
+    color: var(--preto);
+    cursor: pointer;
+    font-weight: bold;
+}
+/* 🐾 CURIOSIDADES FELINAS */
+
+.caixa-curiosidade {
+    max-width: 650px;
+    margin: 25px auto;
+    padding: 30px 22px;
+    border-radius: 25px;
+    background: var(--bege);
+    border: 2px solid var(--laranja);
+    box-shadow: 0 8px 20px #00000012;
+    text-align: center;
+}
+
+#emoji-curiosidade {
+    font-size: 65px;
+    margin-bottom: 15px;
+    animation: flutuarGatinho 2s ease-in-out infinite;
+}
+
+#texto-curiosidade {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--preto);
+    margin: 15px 0 25px;
+}
+
+#numero-curiosidade {
+    font-size: 0.85rem;
+    color: var(--castanho);
+    margin-bottom: 0;
+}
+
+@keyframes flutuarGatinho {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-7px);
+    }
+}
+/* 🐾 MENU DE NAVEGAÇÃO FIXO */
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    box-shadow: 0 4px 15px #00000012;
+}
+
+header nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+header nav a {
+    display: inline-block;
+    padding: 9px 13px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+header nav a:hover {
+    background: var(--laranja);
+    color: var(--preto);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    html {
+        scroll-padding-top: 140px;
+    }
+
+    header nav {
+        gap: 4px;
+        padding: 8px;
+    }
+
+    header nav a {
+        padding: 7px 9px;
+        font-size: 13px;
+    }
+}
     </style>
 </head>
 
-<body><body>
+<body>
+
+<button id="botao-tema" type="button" aria-pressed="false">
+    🌙 Modo noturno
+</button>
 
     <button id="botao-magico" class="botao-magico" type="button"
             aria-label="Lançar corações e patinhas">
@@ -359,7 +790,9 @@ Sou o irmão mais velho do Tobias e estou pronto para te conquistar com os meus 
                     </p>
 
                     <span>O rei da casa 👑</span> 
-<button class="botao-festinha" onclick="fazerFestinha('elvis')">
+<button class="botao-festinha" onclick="fazerFestinha('elvis')"> <p class="contador-festinhas">
+    🐾 Festinhas: <span id="contador-elvis">0</span>
+</p>
     🖤 Fazer festinhas ao Elvis
 </button>
 <p id="mensagem-elvis" class="mensagem-festinha" aria-live="polite"></p>
@@ -378,7 +811,9 @@ Sou o irmão mais novo do Elvis e vim trazer ainda mais diversão a esta casa! �
                     </p>
 
                     <span>O pequeno aventureiro 🐾</span> 
-<button class="botao-festinha" onclick="fazerFestinha('tobias')">
+<button class="botao-festinha" onclick="fazerFestinha('tobias')"> <p class="contador-festinhas">
+    🐾 Festinhas: <span id="contador-tobias">0</span>
+</p>
     🧡 Fazer festinhas ao Tobias
 </button>
 <p id="mensagem-tobias" class="mensagem-festinha" aria-live="polite"></p>
@@ -387,7 +822,56 @@ Sou o irmão mais novo do Elvis e vim trazer ainda mais diversão a esta casa! �
 
             </div>
         </section>
+<!-- 📔 DIÁRIO DOS PATUDOS -->
+<section id="diario" class="secao">
+    <h2>📔 O nosso diário de aventuras</h2>
+    <p>Guarda aqui os momentos mais fofinhos do Elvis e do Tobias!</p>
 
+    <div class="caixa-diario">
+        <label for="nome-aventura">Título da aventura</label>
+        <input id="nome-aventura" type="text"
+               placeholder="Ex.: O Tobias descobriu uma caixa">
+
+        <label for="autor-aventura">Quem foi o protagonista?</label>
+        <select id="autor-aventura">
+            <option value="Elvis">🐈‍⬛ Elvis</option>
+            <option value="Tobias">🍊 Tobias</option>
+            <option value="Ambos">🐾 Os dois</option>
+        </select>
+
+        <label for="texto-aventura">O que aconteceu?</label>
+        <textarea id="texto-aventura" rows="4"
+                  placeholder="Conta aqui a aventura..."></textarea>
+
+        <button id="guardar-aventura" class="botao-festinha" type="button">
+            💾 Guardar aventura
+        </button>
+
+        <p id="mensagem-diario" aria-live="polite"></p>
+    </div>
+
+    <h3>📚 As nossas recordações</h3>
+    <div id="lista-aventuras"></div>
+</section>
+<!-- 🐱 CURIOSIDADES FELINAS -->
+<section id="curiosidades" class="secao">
+    <h2>🐾 Sabias que...?</h2>
+    <p>Descobre curiosidades sobre o mundo dos gatos!</p>
+
+    <div class="caixa-curiosidade">
+        <div id="emoji-curiosidade">🐱</div>
+
+        <p id="texto-curiosidade" aria-live="polite">
+            Os gatos têm muitas surpresas! Carrega no botão para descobrires uma curiosidade.
+        </p>
+
+        <button id="botao-curiosidade" class="botao-festinha" type="button">
+            ✨ Quero aprender!
+        </button>
+
+        <p id="numero-curiosidade"></p>
+    </div>
+</section>
         <!-- GALERIA DE FOTOGRAFIAS -->
         <section id="galeria" class="secao">
             <p class="etiqueta">MOMENTOS ESPECIAIS</p>
@@ -442,6 +926,35 @@ Sou o irmão mais novo do Elvis e vim trazer ainda mais diversão a esta casa! �
 
             </div>
         </section>
+
+<!-- VISUALIZADOR DE FOTOGRAFIAS -->
+<div id="visualizador-foto" class="visualizador-foto" aria-hidden="true">
+    <button id="fechar-foto" class="fechar-foto"
+            type="button" aria-label="Fechar fotografia">✕</button>
+
+    <button id="foto-anterior" class="seta-foto"
+            type="button" aria-label="Fotografia anterior">❮</button>
+
+    <img id="foto-grande" src="" alt="Fotografia ampliada">
+
+    <button id="foto-seguinte" class="seta-foto"
+            type="button" aria-label="Fotografia seguinte">❯</button>
+
+    <p id="legenda-foto"></p>
+</div> 
+<!-- 🐱 MENSAGEM SURPRESA DOS PATUDOS -->
+<section id="mensagem-surpresa" class="secao">
+    <h2>💌 Uma mensagem dos patudos</h2>
+    <p>Queres saber o que o Elvis ou o Tobias te querem dizer?</p>
+
+    <button id="botao-surpresa" class="botao-festinha" type="button">
+        🐾 Receber mensagem
+    </button>
+
+    <div id="texto-surpresa" class="texto-surpresa" aria-live="polite">
+        Carrega no botão para receberes uma mensagem cheia de amor! 🧡
+    </div>
+</section>
 
         <!-- QUIZ DE CONHECIMENTOS -->
         <section id="quiz" class="secao quiz">
@@ -869,6 +1382,11 @@ Sou o irmão mais novo do Elvis e vim trazer ainda mais diversão a esta casa! �
                 "A fotografia ainda não foi enviada nem publicada.";
         }); 
 function fazerFestinha(gato) {
+    const contador = document.getElementById("contador-" + gato);
+
+    if (contador) {
+        contador.textContent = Number(contador.textContent) + 1;
+    }
     const mensagens = {
         elvis: [
             "Purrrr... O Elvis está a adorar as festinhas! 🖤",
@@ -904,6 +1422,370 @@ function fazerFestinha(gato) {
     elemento.style.animation = "aparecerFestinha 0.4s ease";
 }
 
+/* 🐾 BOTÃO MÁGICO: ESPALHAR AMOR */
+
+const botaoMagico = document.getElementById("botao-magico");
+
+if (botaoMagico) {
+    botaoMagico.addEventListener("click", function () {
+        const simbolos = ["🐾", "🧡", "💕", "🐱", "✨", "🤍"];
+
+        // Criar 18 símbolos fofinhos
+        for (let i = 0; i < 18; i++) {
+            const simbolo = document.createElement("span");
+
+            simbolo.className = "patinha-flutuante";
+            simbolo.textContent =
+                simbolos[Math.floor(Math.random() * simbolos.length)];
+
+            // Espalhar os símbolos pelo ecrã
+            simbolo.style.left =
+                (5 + Math.random() * 90) + "vw";
+
+            simbolo.style.top =
+                (45 + Math.random() * 45) + "vh";
+
+            // Pequenos atrasos para parecer mais natural
+            simbolo.style.animationDelay =
+                (Math.random() * 0.5) + "s";
+
+            document.body.appendChild(simbolo);
+
+            // Remover os símbolos quando a animação terminar
+            simbolo.addEventListener("animationend", function () {
+                simbolo.remove();
+            });
+        }
+        // Alterar temporariamente o texto do botão
+        botaoMagico.textContent = "🧡 Amor espalhado!";
+
+        setTimeout(function () {
+            botaoMagico.textContent = "🐾 Espalhar amor";
+        }, 1500);
+    });
+}
+/* 📸 GALERIA INTERATIVA */
+
+const fotografias = Array.from(
+    document.querySelectorAll(".foto-galeria img")
+);
+
+const visualizador = document.getElementById("visualizador-foto");
+const fotoGrande = document.getElementById("foto-grande");
+const legendaFoto = document.getElementById("legenda-foto");
+
+let indiceFoto = 0;
+
+function abrirFotografia(indice) {
+    if (!fotografias.length) return;
+
+    indiceFoto = (indice + fotografias.length) % fotografias.length;
+
+    const foto = fotografias[indiceFoto];
+
+    fotoGrande.src = foto.src;
+    fotoGrande.alt = foto.alt;
+    legendaFoto.textContent =
+        foto.closest("figure")?.querySelector("figcaption")?.textContent || foto.alt;
+
+    visualizador.classList.add("aberto");
+    visualizador.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+}
+
+function fecharFotografia() {
+    visualizador.classList.remove("aberto");
+    visualizador.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    fotoGrande.src = "";
+}
+
+fotografias.forEach(function (foto, indice) {
+    foto.style.cursor = "zoom-in";
+    foto.addEventListener("click", function () {
+        abrirFotografia(indice);
+    });
+});
+
+document.getElementById("fechar-foto").addEventListener("click", fecharFotografia);
+
+document.getElementById("foto-anterior").addEventListener("click", function () {
+    abrirFotografia(indiceFoto - 1);
+});
+
+document.getElementById("foto-seguinte").addEventListener("click", function () {
+    abrirFotografia(indiceFoto + 1);
+});
+
+visualizador.addEventListener("click", function (evento) {
+    if (evento.target === visualizador) {
+        fecharFotografia();
+    }
+});
+
+document.addEventListener("keydown", function (evento) {
+    if (!visualizador.classList.contains("aberto")) return;
+
+    if (evento.key === "Escape") fecharFotografia();
+    if (evento.key === "ArrowLeft") abrirFotografia(indiceFoto - 1);
+    if (evento.key === "ArrowRight") abrirFotografia(indiceFoto + 1);
+});
+/* ✨ ELEMENTOS QUE APARECEM AO DESCER A PÁGINA */
+
+const elementosAnimados = document.querySelectorAll(
+    ".cartao-gato, .cartao-dica, .foto-galeria"
+);
+
+if ("IntersectionObserver" in window) {
+    elementosAnimados.forEach(function (elemento) {
+        elemento.classList.add("animar-entrada");
+    });
+
+    const observador = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+            if (entrada.isIntersecting) {
+                entrada.target.classList.add("visivel");
+                observador.unobserve(entrada.target);
+            }
+        });
+    }, {
+        threshold: 0.15
+    });
+
+    elementosAnimados.forEach(function (elemento) {
+        observador.observe(elemento);
+    });
+} else {
+    elementosAnimados.forEach(function (elemento) {
+        elemento.classList.add("visivel");
+    });
+}
+/* 🌙 ALTERNAR ENTRE TEMA NORMAL E NOTURNO */
+
+const botaoTema = document.getElementById("botao-tema");
+
+if (botaoTema) {
+    botaoTema.addEventListener("click", function () {
+        const temaAtivo = document.body.classList.toggle("tema-noturno");
+
+        botaoTema.textContent = temaAtivo
+            ? "☀️ Modo normal"
+            : "🌙 Modo noturno";
+
+        botaoTema.setAttribute("aria-pressed", String(temaAtivo));
+    });
+}
+/* 💌 MENSAGENS ALEATÓRIAS */
+
+const botaoSurpresa = document.getElementById("botao-surpresa");
+const textoSurpresa = document.getElementById("texto-surpresa");
+
+const mensagensPatudos = [
+    "🐈‍⬛ Elvis: Humano, está na hora de me dares miminhos!",
+    "🍊 Tobias: Eu não fiz asneiras... acho eu! 😇",
+    "🐾 Elvis: Sabias que és a minha pessoa favorita?",
+    "🧡 Tobias: Podemos brincar? Só mais cinco minutinhos!",
+    "😴 Elvis: A minha agenda de hoje está cheia de sestas.",
+    "🐱 Tobias: Se estou quietinho, desconfia!",
+    "💕 Elvis e Tobias: Obrigado por fazeres parte da nossa família!",
+    "🐾 Tobias: Trouxeste comida? Pergunto por motivos científicos.",
+    "🤍 Elvis: Às vezes, tudo o que precisamos é de um bocadinho de carinho.",
+    "✨ Elvis e Tobias: Hoje é um ótimo dia para espalhar patinhas e amor!"
+];
+
+if (botaoSurpresa && textoSurpresa) {
+    botaoSurpresa.addEventListener("click", function () {
+        const mensagemAtual = textoSurpresa.textContent;
+        let mensagemNova;
+
+        do {
+            mensagemNova = mensagensPatudos[
+                Math.floor(Math.random() * mensagensPatudos.length)
+            ];
+        } while (
+            mensagemNova === mensagemAtual &&
+            mensagensPatudos.length > 1
+        );
+
+        textoSurpresa.textContent = mensagemNova;
+        textoSurpresa.classList.remove("mensagem-nova");
+
+        void textoSurpresa.offsetWidth;
+
+        textoSurpresa.classList.add("mensagem-nova");
+    });
+}
+/* 📔 DIÁRIO COM MEMÓRIA NO NAVEGADOR */
+
+const campoTitulo = document.getElementById("nome-aventura");
+const campoAutor = document.getElementById("autor-aventura");
+const campoTexto = document.getElementById("texto-aventura");
+const botaoGuardar = document.getElementById("guardar-aventura");
+const listaAventuras = document.getElementById("lista-aventuras");
+const mensagemDiario = document.getElementById("mensagem-diario");
+
+let aventuras = [];
+
+try {
+    aventuras = JSON.parse(localStorage.getItem("aventurasPatudos") || "[]");
+    if (!Array.isArray(aventuras)) aventuras = [];
+} catch (erro) {
+    aventuras = [];
+}
+
+function mostrarAventuras() {
+    listaAventuras.replaceChildren();
+
+    if (aventuras.length === 0) {
+        listaAventuras.textContent = "Ainda não há aventuras guardadas. 🐾";
+        return;
+    }
+
+    aventuras.forEach(function (aventura, indice) {
+        const cartao = document.createElement("article");
+        cartao.className = "aventura-guardada";
+
+        const titulo = document.createElement("h4");
+        titulo.textContent = aventura.titulo;
+
+        const autor = document.createElement("p");
+        autor.textContent = "🐱 Protagonista: " + aventura.autor;
+
+        const data = document.createElement("small");
+        data.textContent = aventura.data;
+
+        const historia = document.createElement("p");
+        historia.textContent = aventura.texto;
+
+        const apagar = document.createElement("button");
+        apagar.className = "apagar-aventura";
+        apagar.type = "button";
+        apagar.textContent = "🗑️ Apagar";
+        apagar.addEventListener("click", function () {
+            aventuras.splice(indice, 1);
+            guardarNoNavegador();
+            mostrarAventuras();
+        });
+
+        cartao.append(titulo, autor, data, historia, apagar);
+        listaAventuras.appendChild(cartao);
+    });
+}
+
+function guardarNoNavegador() {
+    try {
+        localStorage.setItem("aventurasPatudos", JSON.stringify(aventuras));
+        mensagemDiario.textContent = "🧡 Aventura guardada com sucesso!";
+        return true;
+    } catch (erro) {
+        mensagemDiario.textContent =
+            "Não foi possível guardar. Verifica as definições do navegador.";
+        return false;
+    }
+}
+
+if (botaoGuardar) {
+    botaoGuardar.addEventListener("click", function () {
+        const titulo = campoTitulo.value.trim();
+        const texto = campoTexto.value.trim();
+
+        if (!titulo || !texto) {
+            mensagemDiario.textContent =
+                "Preenche o título e a história antes de guardar! 🐾";
+            return;
+        }
+
+        aventuras.unshift({
+            titulo: titulo,
+            autor: campoAutor.value,
+            texto: texto,
+            data: new Date().toLocaleDateString("pt-PT")
+        });
+
+        if (guardarNoNavegador()) {
+            campoTitulo.value = "";
+            campoTexto.value = "";
+            mostrarAventuras();
+        } else {
+            aventuras.shift();
+        }
+    });
+}
+
+mostrarAventuras();
+/* 🐱 CURIOSIDADES ALEATÓRIAS */
+
+const curiosidadesGatos = [
+    {
+        emoji: "👃",
+        texto: "O nariz de cada gato tem um padrão de pequenas linhas único, semelhante às impressões digitais humanas!"
+    },
+    {
+        emoji: "👂",
+        texto: "Os gatos conseguem orientar as orelhas em diferentes direções para localizar sons."
+    },
+    {
+        emoji: "😴",
+        texto: "Os gatos dormem muitas horas por dia. O sono ajuda-os a descansar e a recuperar energia."
+    },
+    {
+        emoji: "🐾",
+        texto: "Os gatos comunicam através de sons, movimentos da cauda, postura e cheiros."
+    },
+    {
+        emoji: "👀",
+        texto: "Os gatos conseguem ver melhor do que nós em condições de pouca luz, mas não veem na escuridão total."
+    },
+    {
+        emoji: "🧡",
+        texto: "O ronronar pode estar associado ao conforto e ao relaxamento, embora os gatos também ronronem noutras situações."
+    },
+    {
+        emoji: "🐈",
+        texto: "Os bigodes ajudam os gatos a sentir o ambiente à sua volta. Nunca devem ser cortados!"
+    },
+    {
+        emoji: "🍊",
+        texto: "Os gatos laranjas são frequentemente machos, embora também existam gatas laranjas."
+    },
+    {
+        emoji: "💧",
+        texto: "A água fresca e limpa deve estar sempre disponível para os gatos."
+    },
+    {
+        emoji: "🎾",
+        texto: "Brincar ajuda os gatos a exercitar-se, explorar e estimular os seus instintos naturais."
+    }
+];
+
+const botaoCuriosidade = document.getElementById("botao-curiosidade");
+const textoCuriosidade = document.getElementById("texto-curiosidade");
+const emojiCuriosidade = document.getElementById("emoji-curiosidade");
+const numeroCuriosidade = document.getElementById("numero-curiosidade");
+
+let ultimaCuriosidade = -1;
+
+if (botaoCuriosidade) {
+    botaoCuriosidade.addEventListener("click", function () {
+        let indice;
+
+        do {
+            indice = Math.floor(Math.random() * curiosidadesGatos.length);
+        } while (
+            curiosidadesGatos.length > 1 &&
+            indice === ultimaCuriosidade
+        );
+
+        ultimaCuriosidade = indice;
+
+        const curiosidade = curiosidadesGatos[indice];
+
+        emojiCuriosidade.textContent = curiosidade.emoji;
+        textoCuriosidade.textContent = curiosidade.texto;
+        numeroCuriosidade.textContent =
+            "Curiosidade " + (indice + 1) + " de " + curiosidadesGatos.length;
+    });
+}
     </script>
 
 </body>
