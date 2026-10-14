@@ -1,0 +1,911 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Elvis & Tobias | O nosso mundo felino</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root {
+            --preto: #24211f;
+            --bege: #e9d8c3;
+            --creme: #fff9f0;
+            --laranja: #e99a45;
+            --castanho: #704b32;
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--creme);
+            color: var(--preto);
+            line-height: 1.7;
+        }
+
+        header {
+            background: var(--preto);
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        header h1 {
+            font-size: clamp(30px, 5vw, 48px);
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            margin-top: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: var(--laranja);
+        }
+
+        .secao {
+            padding: 65px 20px;
+            text-align: center;
+        }
+
+        .inicio {
+            background: var(--bege);
+            padding: 90px 20px;
+        }
+
+        .inicio h2 {
+            font-size: clamp(30px, 5vw, 45px);
+            max-width: 750px;
+            margin: 10px auto;
+        }
+
+        .inicio p,
+        .introducao {
+            max-width: 700px;
+            margin: 15px auto 25px;
+        }
+
+        .etiqueta {
+            color: var(--castanho);
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        .secao h2 {
+            font-size: 32px;
+        }
+
+        .botao {
+            display: inline-block;
+            background: var(--laranja);
+            color: var(--preto);
+            border: none;
+            border-radius: 30px;
+            padding: 13px 24px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .botao:hover {
+            background: var(--preto);
+            color: white;
+        }
+
+        .cartoes-gatos,
+        .galeria,
+        .cartoes-dicas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        .cartao-gato,
+        .foto-galeria,
+        .cartao-dica {
+            background: white;
+            border-radius: 20px;
+            padding: 18px;
+            box-shadow: 0 5px 20px #0000000c;
+            overflow: hidden;
+        }
+
+        .cartao-gato img {
+            width: 100%;
+            height: 270px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .cartao-gato h3,
+        .cartao-dica h3 {
+            font-size: 22px;
+        }
+
+        .cartao-gato span {
+            color: var(--castanho);
+            font-weight: bold;
+        }
+
+        .foto-galeria {
+            margin: 0;
+            padding: 10px;
+        }
+
+        .foto-galeria img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .foto-galeria img:hover {
+            transform: scale(1.03);
+        }
+
+        figcaption {
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .quiz {
+            background: var(--bege);
+        }
+
+        .caixa-quiz {
+            max-width: 750px;
+            margin: 25px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 20px;
+            text-align: left;
+        }
+
+        .pergunta {
+            padding: 15px 0;
+            border-bottom: 1px solid #eadfd2;
+        }
+
+        .pergunta p {
+            font-weight: bold;
+        }
+
+        .pergunta label {
+            display: block;
+            padding: 5px 0;
+            cursor: pointer;
+        }
+
+        .caixa-quiz input[type="radio"] {
+            accent-color: var(--laranja);
+        }
+
+        .campo {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--bege);
+            border-radius: 10px;
+            font: inherit;
+            background: white;
+        }
+
+        #resultado-quiz,
+        #resultado-personalidade {
+            margin-top: 20px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .personalidade {
+            background: white;
+        }
+
+        .resultado-gato {
+            max-width: 650px;
+            margin: 25px auto;
+            padding: 25px;
+            border-radius: 20px;
+            background: var(--creme);
+        }
+
+        .resultado-gato img {
+            width: 100%;
+            max-width: 350px;
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .comunidade {
+            background: var(--bege);
+        }
+
+        .form-patudo {
+            display: grid;
+            gap: 12px;
+            text-align: left;
+            max-width: 600px;
+            margin: 25px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 20px;
+        }
+
+        .form-patudo label {
+            font-weight: bold;
+        }
+
+        .form-patudo input,
+        .form-patudo select,
+        .form-patudo textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--bege);
+            border-radius: 10px;
+            font: inherit;
+        }
+
+        #foto-escolhida {
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+
+        .nota {
+            font-size: 13px;
+        }
+
+        footer {
+            background: var(--preto);
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media (max-width: 500px) {
+            .secao {
+                padding: 45px 15px;
+            }
+
+            .caixa-quiz {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body><body>
+
+    <button id="botao-magico" class="botao-magico" type="button"
+            aria-label="Lançar corações e patinhas">
+        🐾 Espalhar amor
+    </button>
+
+    <!-- CABEÇALHO -->
+    <header>
+        <h1>🐾 Elvis & Tobias</h1>
+        <p>Dois gatos, mil aventuras!</p>
+
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#gatos">Os gatos</a>
+            <a href="#galeria">Fotografias</a>
+            <a href="#quiz">Quiz</a>
+            <a href="#personalidade">Quem és tu?</a>
+            <a href="#dicas">Dicas</a>
+            <a href="#comunidade">Comunidade</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- INÍCIO -->
+        <section id="inicio" class="secao inicio">
+            <p class="etiqueta">BEM-VINDOS AO NOSSO MUNDO</p>
+
+            <h2>Uma casa, dois gatos e muito amor 🧡</h2>
+
+            <p>
+                Conhece o Elvis e o Tobias, vê as nossas fotografias,
+                responde aos quizzes e descobre qual dos nossos gatos
+                combina mais contigo!
+            </p>
+
+            <a href="#gatos" class="botao">Conhecer os gatos</a>
+        </section>
+
+        <!-- APRESENTAÇÃO DOS GATOS -->
+        <section id="gatos" class="secao">
+            <p class="etiqueta">OS DONOS DA CASA</p>
+            <h2>Conhece o Elvis e o Tobias</h2>
+
+            <div class="cartoes-gatos">
+
+                <article class="cartao-gato">
+                    <img src="./imagens/elvis.jpeg" alt="Elvis, gato preto e branco">
+
+                    <h3>Elvis 🖤🤍</h3>
+
+                    <p>
+                        Olá! 🐾 Eu sou o Elvis! 🤍🖤
+
+Sou um gatinho meigo, curioso e muito conversador. Adoro miminhos, bolinhas, comer e dormir. 😹
+Sou o irmão mais velho do Tobias e estou pronto para te conquistar com os meus ronrons! 🐱💕
+                    </p>
+
+                    <span>O rei da casa 👑</span> 
+<button class="botao-festinha" onclick="fazerFestinha('elvis')">
+    🖤 Fazer festinhas ao Elvis
+</button>
+<p id="mensagem-elvis" class="mensagem-festinha" aria-live="polite"></p>
+
+                </article>
+
+                <article class="cartao-gato">
+                    <img src="./imagens/TobiasS.jpeg" alt="Tobias, gatinho laranja">
+
+                    <h3>Tobias 🧡</h3>
+
+                    <p>
+                       Oláá! 🧡🐾 Eu sou o Tobias!
+Sou um laranjinha pequenino, cheio de energia e traquinices! 😸 Adoro explorar tudo à minha volta e espalhar fofura por onde passo.
+Sou o irmão mais novo do Elvis e vim trazer ainda mais diversão a esta casa! 🐈🧡
+                    </p>
+
+                    <span>O pequeno aventureiro 🐾</span> 
+<button class="botao-festinha" onclick="fazerFestinha('tobias')">
+    🧡 Fazer festinhas ao Tobias
+</button>
+<p id="mensagem-tobias" class="mensagem-festinha" aria-live="polite"></p>
+
+                </article>
+
+            </div>
+        </section>
+
+        <!-- GALERIA DE FOTOGRAFIAS -->
+        <section id="galeria" class="secao">
+            <p class="etiqueta">MOMENTOS ESPECIAIS</p>
+            <h2>A nossa galeria 📸</h2>
+
+            <p class="introducao">
+                As nossas fotografias favoritas, porque cada momento
+                com eles merece ser guardado.
+            </p>
+
+            <div class="galeria">
+
+                <figure class="foto-galeria">
+                    <img src="./imagens/elvis.jpeg" alt="Elvis">
+                    <figcaption>O Elvis 🖤🤍</figcaption>
+                </figure>
+
+                <figure class="foto-galeria">
+                    <img src="./imagens/ElvisDeitado.jpeg" alt="Elvis deitado">
+                    <figcaption>Não me chateiem, estou a dormir 😴</figcaption>
+                </figure>
+
+                <figure class="foto-galeria">
+                    <img src="./imagens/ElvisDlado.jpeg" alt="Elvis de lado">
+                    <figcaption>O meu melhor ângulo ✨</figcaption>
+                </figure>
+
+                <figure class="foto-galeria">
+                    <img src="./imagens/elvisSentado.jpeg" alt="Elvis sentado">
+                    <figcaption>O patrão da casa 👑</figcaption>
+                </figure>
+
+                <figure class="foto-galeria">
+                    <img src="./imagens/TobiasS.jpeg" alt="Tobias">
+                    <figcaption>O nosso laranjinha 🧡</figcaption>
+                </figure>
+
+                <figure class="foto-galeria">
+                    <img src="./imagens/TobiasSentado.jpeg" alt="Tobias sentado">
+                    <figcaption>Pequeno, mas poderoso 🐱</figcaption>
+                </figure>
+
+                <figure class="foto-galeria">
+                    <img src="./imagens/IMG_7984.jpeg" alt="Fotografia de um dos gatos">
+                    <figcaption>Mais um momento especial 🐾</figcaption>
+                </figure>
+
+                <figure class="foto-galeria">
+                    <img src="./imagens/IMG_9726.jpeg" alt="Fotografia de um dos gatos">
+                    <figcaption>Uma recordação cheia de amor 🧡</figcaption>
+                </figure>
+
+            </div>
+        </section>
+
+        <!-- QUIZ DE CONHECIMENTOS -->
+        <section id="quiz" class="secao quiz">
+            <p class="etiqueta">TESTA OS TEUS CONHECIMENTOS</p>
+            <h2>O quanto sabes sobre gatos? 🐱</h2>
+
+            <p>
+                Responde às 10 perguntas e descobre quantas acertaste!
+            </p>
+
+            <form id="quiz-gatos" class="caixa-quiz">
+
+                <div class="pergunta">
+                    <p>1. Quantos bigodes tem um gato, aproximadamente, em cada lado do focinho?</p>
+                    <label><input type="radio" name="q1" value="a" required> A) Cerca de 2</label>
+                    <label><input type="radio" name="q1" value="b"> B) Cerca de 12</label>
+                    <label><input type="radio" name="q1" value="c"> C) Cerca de 30</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>2. Para que servem os bigodes dos gatos?</p>
+                    <label><input type="radio" name="q2" value="a" required> A) Para ajudar a sentir o ambiente à sua volta</label>
+                    <label><input type="radio" name="q2" value="b"> B) Apenas para decorar o focinho</label>
+                    <label><input type="radio" name="q2" value="c"> C) Para regular a temperatura do corpo</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>3. O que significa, muitas vezes, um gato ronronar?</p>
+                    <label><input type="radio" name="q3" value="a" required> A) Que está sempre com fome</label>
+                    <label><input type="radio" name="q3" value="b"> B) Que está confortável ou a comunicar algo</label>
+                    <label><input type="radio" name="q3" value="c"> C) Que quer necessariamente sair de casa</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>4. Qual destes alimentos pode ser perigoso para os gatos?</p>
+                    <label><input type="radio" name="q4" value="a" required> A) Alimento completo próprio para gatos</label>
+                    <label><input type="radio" name="q4" value="b"> B) Chocolate</label>
+                    <label><input type="radio" name="q4" value="c"> C) Água fresca</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>5. Quantas horas pode um gato adulto dormir por dia?</p>
+                    <label><input type="radio" name="q5" value="a" required> A) Cerca de 12 a 16 horas, por vezes mais</label>
+                    <label><input type="radio" name="q5" value="b"> B) Apenas 3 horas</label>
+                    <label><input type="radio" name="q5" value="c"> C) Exatamente 24 horas</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>6. Como deves transportar um gato de forma segura?</p>
+                    <label><input type="radio" name="q6" value="a" required> A) Ao colo, com a janela aberta</label>
+                    <label><input type="radio" name="q6" value="b"> B) Num transportador adequado e seguro</label>
+                    <label><input type="radio" name="q6" value="c"> C) Solto dentro do carro</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>7. Para que serve uma caixa de areia?</p>
+                    <label><input type="radio" name="q7" value="a" required> A) Para o gato dormir sempre lá</label>
+                    <label><input type="radio" name="q7" value="b"> B) Para guardar os brinquedos</label>
+                    <label><input type="radio" name="q7" value="c"> C) Para o gato fazer as suas necessidades</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>8. Qual é uma boa forma de estimular um gato?</p>
+                    <label><input type="radio" name="q8" value="a" required> A) Brincar com brinquedos seguros</label>
+                    <label><input type="radio" name="q8" value="b"> B) Nunca o deixar brincar</label>
+                    <label><input type="radio" name="q8" value="c"> C) Assustá-lo frequentemente</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>9. O que deves fazer se o teu gato deixar de comer e parecer doente?</p>
+                    <label><input type="radio" name="q9" value="a" required> A) Dar-lhe medicamentos humanos</label>
+                    <label><input type="radio" name="q9" value="b"> B) Pedir orientação a um veterinário</label>
+                    <label><input type="radio" name="q9" value="c"> C) Ignorar sempre a situação</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>10. Como deves reagir quando um gato não quer receber carinho?</p>
+                    <label><input type="radio" name="q10" value="a" required> A) Continuar a agarrá-lo</label>
+                    <label><input type="radio" name="q10" value="b"> B) Gritar com ele</label>
+                    <label><input type="radio" name="q10" value="c" required> C) Respeitar o espaço dele</label>
+                </div>
+
+                <button type="submit" class="botao">
+                    Corrigir o meu quiz 🏆
+                </button>
+
+                <p id="resultado-quiz" aria-live="polite"></p>
+
+            </form>
+        </section>
+
+        <!-- TESTE DE PERSONALIDADE -->
+        <section id="personalidade" class="secao personalidade">
+            <p class="etiqueta">O TESTE MAIS FOFO DO SITE</p>
+            <h2>És mais Elvis ou Tobias? 🐾</h2>
+
+            <p class="introducao">
+                Responde às perguntas de acordo com a tua personalidade.
+                No final, vais descobrir com qual dos nossos gatos
+                tens mais coisas em comum!
+            </p>
+
+            <form id="teste-personalidade" class="caixa-quiz">
+
+                <div class="pergunta">
+                    <p>1. Num dia livre, preferes...</p>
+                    <label><input type="radio" name="p1" value="elvis" required> A) Ficar confortável em casa</label>
+                    <label><input type="radio" name="p1" value="tobias"> B) Sair e descobrir coisas novas</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>2. Quando conheces pessoas novas...</p>
+                    <label><input type="radio" name="p2" value="elvis" required> A) Gosto de conversar quando me sinto à vontade</label>
+                    <label><input type="radio" name="p2" value="tobias"> B) Tenho curiosidade e quero descobrir quem são</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>3. Qual seria o teu superpoder?</p>
+                    <label><input type="radio" name="p3" value="elvis" required> A) Ter sempre conforto e tranquilidade</label>
+                    <label><input type="radio" name="p3" value="tobias"> B) Ter energia para mil aventuras</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>4. Escolhe a tua atividade favorita.</p>
+                    <label><input type="radio" name="p4" value="elvis" required> A) Ver uma série, comer e descansar</label>
+                    <label><input type="radio" name="p4" value="tobias"> B) Experimentar um passatempo novo</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>5. Os teus amigos diriam que és...</p>
+                    <label><input type="radio" name="p5" value="elvis" required> A) Meigo, calmo e atencioso</label>
+                    <label><input type="radio" name="p5" value="tobias"> B) Curioso, divertido e cheio de energia</label>
+                </div>
+
+                <div class="pergunta">
+                    <p>6. Quando aparece um desafio...</p>
+                    <label><input type="radio" name="p6" value="elvis" required> A) Paro para pensar antes de agir</label>
+                    <label><input type="radio" name="p6" value="tobias"> B) Quero experimentar e descobrir como funciona</label>
+                </div>
+
+                <button type="submit" class="botao">
+                    Descobrir o meu gato 🧡
+                </button>
+
+                <div id="resultado-personalidade" aria-live="polite"></div>
+
+            </form>
+        </section>
+
+        <!-- DICAS -->
+        <section id="dicas" class="secao">
+            <p class="etiqueta">CUIDAR É AMAR</p>
+            <h2>Pequenas dicas para grandes patudos 🐱</h2>
+
+            <div class="cartoes-dicas">
+
+                <article class="cartao-dica">
+                    <h3>🥣 Alimentação</h3>
+                    <p>
+                        Escolhe alimentos adequados à idade e às
+                        necessidades do teu gato. Deixa sempre
+                        água fresca disponível.
+                    </p>
+                </article>
+
+                <article class="cartao-dica">
+                    <h3>🧶 Brincadeiras</h3>
+                    <p>
+                        Brincar diariamente ajuda a estimular a
+                        curiosidade e a atividade física. Escolhe
+                        brinquedos seguros.
+                    </p>
+                </article>
+
+                <article class="cartao-dica">
+                    <h3>🩺 Saúde</h3>
+                    <p>
+                        Mantém os cuidados veterinários em dia
+                        e pede ajuda profissional quando notares
+                        alterações na saúde do teu animal.
+                    </p>
+                </article>
+
+                <article class="cartao-dica">
+                    <h3>❤️ Respeito</h3>
+                    <p>
+                        Cada gato tem a sua personalidade.
+                        Respeita os seus limites e deixa-o
+                        aproximar-se ao seu ritmo.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- COMUNIDADE -->
+        <section id="comunidade" class="secao comunidade">
+            <p class="etiqueta">A NOSSA FAMÍLIA CRESCE</p>
+            <h2>Queremos conhecer o teu patudo! 🐶🐱</h2>
+
+            <p class="introducao">
+                Prepara a participação do teu animal e escolhe
+                uma fotografia para pré-visualizar.
+            </p>
+
+            <form id="form-patudo" class="form-patudo">
+
+                <label for="nome-animal">Nome do teu animal</label>
+                <input type="text" id="nome-animal"
+                    placeholder="Ex.: Luna" maxlength="40" required>
+
+                <label for="tipo-animal">Que animal é?</label>
+                <select id="tipo-animal" required>
+                    <option value="">Escolhe uma opção</option>
+                    <option value="Gato">Gato 🐱</option>
+                    <option value="Cão">Cão 🐶</option>
+                    <option value="Coelho">Coelho 🐰</option>
+                    <option value="Outro">Outro animal 🐾</option>
+                </select>
+
+                <label for="historia-animal">Conta-nos algo sobre ele</label>
+                <textarea id="historia-animal" rows="4" maxlength="250"
+                    placeholder="O que o torna especial?"></textarea>
+
+                <label for="foto-animal">Escolhe uma fotografia</label>
+                <input type="file" id="foto-animal"
+                    accept="image/jpeg,image/png,image/webp" required>
+
+                <div id="pre-visualizacao" hidden>
+                    <img id="foto-escolhida"
+                        alt="Pré-visualização do animal">
+                </div>
+
+                <p class="nota">
+                    Este formulário ainda não envia fotografias para a
+                    Internet. A imagem é apenas pré-visualizada no teu
+                    dispositivo. As participações devem ser revistas
+                    antes de qualquer publicação.
+                </p>
+
+                <button type="submit" class="botao">
+                    Preparar participação 🐾
+                </button>
+
+                <p id="mensagem-comunidade" aria-live="polite"></p>
+
+            </form>
+        </section>
+
+        <!-- INSTAGRAM -->
+        <section class="secao">
+            <p class="etiqueta">ACOMPANHA AS NOSSAS AVENTURAS</p>
+            <h2>Também estamos no Instagram! 📱</h2>
+
+            <p>
+                Segue o Elvis e o Tobias para não perderes
+                os nossos momentos mais fofos.
+            </p>
+
+            <a class="botao"
+                href="https://www.instagram.com/elvisandtobias/"
+                target="_blank"
+                rel="noopener noreferrer">
+                @elvisandtobias
+            </a>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <p>Feito com 🧡 para o Elvis e o Tobias.</p>
+        <p>© 2026 Elvis & Tobias</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // QUIZ DE CONHECIMENTOS
+
+        document.getElementById("quiz-gatos").addEventListener("submit", function(evento) {
+            evento.preventDefault();
+
+            const respostas = {
+                q1: "b",
+                q2: "a",
+                q3: "b",
+                q4: "b",
+                q5: "a",
+                q6: "b",
+                q7: "c",
+                q8: "a",
+                q9: "b",
+                q10: "c"
+            };
+
+            let pontos = 0;
+
+            for (let pergunta in respostas) {
+                const escolhida = document.querySelector(
+                    'input[name="' + pergunta + '"]:checked'
+                );
+
+                if (escolhida && escolhida.value === respostas[pergunta]) {
+                    pontos++;
+                }
+            }
+
+            document.getElementById("resultado-quiz").textContent =
+                "Resultado: " + pontos + " em 10! " +
+                (pontos === 10
+                    ? "Incrível! És um verdadeiro especialista em gatos! 🏆"
+                    : pontos >= 7
+                    ? "Muito bem! Sabes bastante sobre gatos! 🐾"
+                    : "Continua a aprender e volta a tentar! 🧡");
+        });
+
+
+        // TESTE: ÉS MAIS ELVIS OU TOBIAS?
+
+        document.getElementById("teste-personalidade").addEventListener("submit", function(evento) {
+            evento.preventDefault();
+
+            let elvis = 0;
+            let tobias = 0;
+
+            for (let i = 1; i <= 6; i++) {
+                const resposta = document.querySelector(
+                    'input[name="p' + i + '"]:checked'
+                );
+
+                if (resposta.value === "elvis") {
+                    elvis++;
+                } else {
+                    tobias++;
+                }
+            }
+
+            const resultado = document.getElementById("resultado-personalidade");
+
+            if (elvis > tobias) {
+                resultado.innerHTML =
+                    '<div class="resultado-gato">' +
+                    '<h3>És mais Elvis! 🖤🤍</h3>' +
+                    '<img src="./imagens/ElvisDeitado.jpeg" alt="Elvis deitado">' +
+                    '<p>És tranquilo, meigo e aprecias os momentos de conforto. ' +
+                    'Gostas de estar com quem te faz sentir bem e tens ' +
+                    'um lado atento e carinhoso. Tens alma de rei da casa!</p>' +
+                    '</div>';
+            } else if (tobias > elvis) {
+                resultado.innerHTML =
+                    '<div class="resultado-gato">' +
+                    '<h3>És mais Tobias! 🧡</h3>' +
+                    '<img src="./imagens/TobiasSentado.jpeg" alt="Tobias sentado">' +
+                    '<p>És curioso, divertido e gostas de descobrir coisas novas. ' +
+                    'Tens energia, imaginação e espírito aventureiro. ' +
+                    'A vida contigo nunca é aborrecida!</p>' +
+                    '</div>';
+            } else {
+                resultado.innerHTML =
+                    '<div class="resultado-gato">' +
+                    '<h3>És uma mistura dos dois! 🐾</h3>' +
+                    '<img src="./imagens/elvis.jpeg" alt="Elvis">' +
+                    '<p>Tens um lado tranquilo e carinhoso como o Elvis, ' +
+                    'mas também uma parte curiosa e aventureira como o Tobias. ' +
+                    'A combinação perfeita!</p>' +
+                    '</div>';
+            }
+        });
+
+
+        // PRÉ-VISUALIZAÇÃO DA FOTOGRAFIA DA COMUNIDADE
+
+        const campoFoto = document.getElementById("foto-animal");
+        const preVisualizacao = document.getElementById("pre-visualizacao");
+        const fotoEscolhida = document.getElementById("foto-escolhida");
+        const mensagem = document.getElementById("mensagem-comunidade");
+        let urlFoto = null;
+
+        campoFoto.addEventListener("change", function() {
+            if (urlFoto) {
+                URL.revokeObjectURL(urlFoto);
+                urlFoto = null;
+            }
+
+            const ficheiro = campoFoto.files[0];
+
+            if (!ficheiro) {
+                preVisualizacao.hidden = true;
+                fotoEscolhida.removeAttribute("src");
+                return;
+            }
+
+            if (!ficheiro.type.startsWith("image/")) {
+                mensagem.textContent = "Escolhe um ficheiro de imagem válido.";
+                campoFoto.value = "";
+                preVisualizacao.hidden = true;
+                return;
+            }
+
+            if (ficheiro.size > 5 * 1024 * 1024) {
+                mensagem.textContent = "A fotografia deve ter menos de 5 MB.";
+                campoFoto.value = "";
+                preVisualizacao.hidden = true;
+                return;
+            }
+
+            urlFoto = URL.createObjectURL(ficheiro);
+            fotoEscolhida.src = urlFoto;
+            preVisualizacao.hidden = false;
+            mensagem.textContent = "Fotografia selecionada! 🧡";
+        });
+
+        document.getElementById("form-patudo").addEventListener("submit", function(evento) {
+            evento.preventDefault();
+
+            const nome = document.getElementById("nome-animal").value.trim();
+
+            if (!campoFoto.files.length) {
+                mensagem.textContent = "Escolhe primeiro uma fotografia.";
+                return;
+            }
+
+            mensagem.textContent =
+                "A participação de " + nome + " está preparada! 🐾 " +
+                "A fotografia ainda não foi enviada nem publicada.";
+        }); 
+function fazerFestinha(gato) {
+    const mensagens = {
+        elvis: [
+            "Purrrr... O Elvis está a adorar as festinhas! 🖤",
+            "O Elvis fecha os olhinhos e pede mais carinho. 🥹",
+            "Parabéns! Ganhaste a confiança do rei da casa! 👑",
+            "O Elvis diz: mais cinco minutos de mimos, por favor! 🤍"
+        ],
+        tobias: [
+            "Miau! O Tobias ficou tão contente que começou a brincar! 🧡",
+            "O Tobias manda-te uma patinha cheia de amor! 🐾",
+            "Festinhas aprovadas pelo pequeno laranjinha! 🍊",
+            "O Tobias interrompeu a aventura para receber mimos! 😻"
+        ]
+    };
+
+    const elemento = document.getElementById("mensagem-" + gato);
+    const lista = mensagens[gato];
+
+    if (!elemento || !lista) return;
+
+    const mensagemAnterior = elemento.dataset.mensagem;
+    let mensagem;
+
+    do {
+        mensagem = lista[Math.floor(Math.random() * lista.length)];
+    } while (lista.length > 1 && mensagem === mensagemAnterior);
+
+    elemento.dataset.mensagem = mensagem;
+    elemento.textContent = mensagem;
+
+    elemento.style.animation = "none";
+    void elemento.offsetWidth;
+    elemento.style.animation = "aparecerFestinha 0.4s ease";
+}
+
+    </script>
+
+</body>
+</html>
+```
